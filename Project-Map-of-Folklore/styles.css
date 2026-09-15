@@ -1,0 +1,948 @@
+* {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            width: 100%;
+            min-height: 100%;
+            font-family: Arial, sans-serif;
+            color: #111827;
+            background: #ffffff;
+        }
+
+        body {
+            overflow-x: hidden;
+        }
+
+        /* =====================================================
+           HEADER
+        ===================================================== */
+
+        header {
+            height: 60px;
+            background: #242424;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 0 22px;
+            gap: 12px;
+        }
+
+        header h1 {
+            font-size: 21px;
+            font-weight: 500;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        header span {
+            font-size: 13px;
+            color: #bdbdbd;
+        }
+
+        /* =====================================================
+           MAIN GRID
+
+           LEFT       CENTER             RIGHT
+           sidebar    map + lower panels semantic
+        ===================================================== */
+
+        .app-layout {
+
+            display: grid;
+
+            grid-template-columns:
+                24% minmax(0, 1fr) 18%;
+
+            grid-template-rows:
+                minmax(360px, 62%) minmax(0, 38%);
+
+            gap: 0;
+
+            width: 100%;
+            height: calc(100vh - 60px);
+            min-height: 620px;
+
+        }
+
+        /* =====================================================
+           LEFT SIDEBAR
+
+           Spans both rows
+        ===================================================== */
+
+        .sidebar {
+
+            grid-column: 1;
+            grid-row: 1 / 3;
+
+            display: flex;
+            flex-direction: column;
+
+            min-width: 0;
+
+            border-right: 1px solid #d7d7d7;
+
+            background: #fafafa;
+
+            overflow: hidden;
+
+        }
+
+        /* =====================================================
+           SEARCH
+        ===================================================== */
+
+        .search-area {
+
+            padding: 15px 16px 12px;
+
+            border-bottom: 1px solid #e2e2e2;
+
+        }
+
+        .search-label {
+
+            display: block;
+
+            font-size: 12px;
+
+            color: #777;
+
+            margin-bottom: 6px;
+
+        }
+
+        #searchInput {
+
+            width: 100%;
+
+            height: 35px;
+
+            padding: 0 10px;
+
+            border: 1px solid #d5d5d5;
+
+            border-radius: 3px;
+
+            background: white;
+
+            font-size: 12px;
+
+            outline: none;
+
+        }
+
+        #searchInput:focus {
+
+            border-color: #888;
+
+        }
+
+        /* =====================================================
+           TAGS / MOTIFS
+        ===================================================== */
+
+        .motif-area {
+
+            padding: 14px 16px 12px;
+
+            border-bottom: 1px solid #e2e2e2;
+
+            /*
+             * legends.json contains many more motifs than the
+             * original five-story demo. Keep this section compact
+             * so it cannot push the story cards off-screen.
+             */
+            max-height: 190px;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            scrollbar-width: thin;
+            scrollbar-color: #bdbdbd transparent;
+
+        }
+
+        .motif-area::-webkit-scrollbar {
+
+            width: 6px;
+
+        }
+
+        .motif-area::-webkit-scrollbar-thumb {
+
+            background: #bdbdbd;
+            border-radius: 6px;
+
+        }
+
+        .motif-area::-webkit-scrollbar-track {
+
+            background: transparent;
+
+        }
+
+        .motif-header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 8px;
+
+        }
+
+        .motif-header strong {
+
+            font-size: 12px;
+
+        }
+
+        #clearFilters {
+
+            border: none;
+
+            background: none;
+
+            cursor: pointer;
+
+            color: #777;
+
+            font-size: 11px;
+
+            padding: 0;
+
+        }
+
+        #clearFilters:hover {
+
+            color: #111;
+
+        }
+
+        .tag-list {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 5px;
+
+        }
+
+        .tag-button {
+
+            background: white;
+
+            border: 1px solid #d3d3d3;
+
+            border-radius: 3px;
+
+            color: #444;
+
+            font-size: 11px;
+
+            padding: 5px 8px;
+
+            cursor: pointer;
+
+        }
+
+        .tag-button:hover {
+
+            background: #eeeeee;
+
+        }
+
+        .tag-button.active {
+
+            background: #e6e6e6;
+
+            border-color: #888;
+
+            color: #111;
+
+        }
+
+        /* =====================================================
+           STORY LIST
+        ===================================================== */
+
+        .story-count {
+
+            padding: 10px 16px;
+
+            font-size: 11px;
+
+            color: #777;
+
+            background: #f5f5f5;
+
+            border-bottom: 1px solid #e5e5e5;
+
+        }
+
+        .story-list {
+
+            flex: 1 1 0;
+
+            overflow-y: auto;
+
+            min-height: 120px;
+
+        }
+
+        .story-item {
+
+            padding: 14px 16px;
+
+            background: #fafafa;
+
+            border-bottom: 1px solid #e2e2e2;
+
+            cursor: pointer;
+
+            transition: background 0.15s;
+
+        }
+
+        .story-item:hover {
+
+            background: #f0f0f0;
+
+        }
+
+        .story-item.selected {
+
+            background: #e8e8e8;
+
+            border-left: 3px solid #333;
+
+            padding-left: 13px;
+
+        }
+
+        .story-name {
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+
+            color: #222;
+
+        }
+
+        .story-tags {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 4px;
+
+        }
+
+        .story-tag {
+
+            background: #e8e8e8;
+
+            color: #555;
+
+            font-size: 9px;
+
+            border-radius: 2px;
+
+            padding: 3px 5px;
+
+        }
+
+        .no-stories {
+
+            padding: 18px 16px;
+
+            color: #777;
+
+            font-size: 12px;
+
+        }
+
+        /* =====================================================
+           CENTER MAP
+
+           The map has its own grid cell.
+        ===================================================== */
+
+        .map-container {
+
+            grid-column: 2;
+
+            grid-row: 1;
+
+            min-width: 0;
+
+            min-height: 0;
+
+            position: relative;
+
+            background: #dceff4;
+
+            border-bottom: 1px solid #cccccc;
+
+        }
+
+        #map {
+
+            width: 100%;
+
+            height: 100%;
+
+            min-height: 300px;
+
+        }
+
+        /* =====================================================
+           BOTTOM CENTER
+
+           Description + NLP
+        ===================================================== */
+
+        .bottom-panels {
+
+            grid-column: 2 / 4;
+
+            grid-row: 2;
+
+            display: grid;
+
+            grid-template-columns: minmax(0, 76%) minmax(0, 24%);
+
+            min-width: 0;
+            min-height: 0;
+            height: 100%;
+
+            background: white;
+
+            overflow: hidden;
+
+        }
+
+        .panel {
+
+            min-width: 0;
+            min-height: 0;
+            height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 14px;
+
+            overflow: hidden;
+            overflow-wrap: anywhere;
+
+        }
+
+        #descriptionContent,
+        #nlpContent {
+
+            flex: 1 1 0;
+            min-height: 0;
+            height: 0;
+
+            overflow-y: scroll;
+            overflow-x: hidden;
+            overscroll-behavior: contain;
+
+            padding-right: 10px;
+
+            scrollbar-width: thin;
+            scrollbar-gutter: stable;
+
+        }
+
+        #descriptionContent::-webkit-scrollbar,
+        #nlpContent::-webkit-scrollbar {
+
+            width: 7px;
+
+        }
+
+        #descriptionContent::-webkit-scrollbar-thumb,
+        #nlpContent::-webkit-scrollbar-thumb {
+
+            background: #c5c5c5;
+            border-radius: 8px;
+
+        }
+
+        #descriptionContent::-webkit-scrollbar-track,
+        #nlpContent::-webkit-scrollbar-track {
+
+            background: transparent;
+
+        }
+
+        .description-panel {
+
+            border-right: 1px solid #d8d8d8;
+
+        }
+
+        .panel-title {
+
+            flex-shrink: 0;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            padding-bottom: 12px;
+
+            margin-bottom: 14px;
+
+            border-bottom: 1px solid #dddddd;
+
+        }
+
+        .placeholder {
+
+            color: #999;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+        }
+
+        .description-title {
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            line-height: 1.3;
+
+            margin-bottom: 18px;
+
+        }
+
+        .description-text {
+
+            font-size: 12px;
+
+            line-height: 1.8;
+
+            color: #333;
+
+        }
+
+        .location {
+
+            margin-top: 20px;
+
+            font-size: 13px;
+
+            color: #777;
+
+        }
+
+        /* =====================================================
+           NLP
+        ===================================================== */
+
+        .nlp-section {
+
+            margin-bottom: 24px;
+
+        }
+
+        .nlp-heading {
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+
+            padding-bottom: 8px;
+
+            border-bottom: 1px solid #e5e5e5;
+
+        }
+
+        .keyword-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding: 8px 0;
+
+            border-bottom: 1px solid #f0f0f0;
+
+            font-size: 13px;
+
+        }
+
+        .keyword-frequency {
+
+            color: #777;
+
+            font-weight: bold;
+
+        }
+
+        .entity-row {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 8px 0;
+
+            border-bottom: 1px solid #f0f0f0;
+
+            font-size: 13px;
+
+        }
+
+        .entity-type {
+
+            background: #e7e7e7;
+
+            color: #444;
+
+            padding: 3px 6px;
+
+            font-size: 10px;
+
+            border-radius: 3px;
+
+        }
+
+        /* =====================================================
+           RIGHT SEMANTIC PANEL
+
+           Compact panel beside the map only.
+        ===================================================== */
+
+        .semantic-panel {
+
+            grid-column: 3;
+            grid-row: 1;
+
+            min-width: 0;
+            min-height: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            padding: 14px;
+
+            background: #ffffff;
+
+            border-left: 1px solid #d8d8d8;
+            border-bottom: 1px solid #cccccc;
+
+            overflow-y: auto;
+            overflow-x: hidden;
+
+        }
+
+        .semantic-title {
+
+            flex-shrink: 0;
+
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 1.4;
+
+            color: #222;
+
+            padding-bottom: 12px;
+            margin: 0 0 14px;
+
+            border-bottom: 1px solid #dddddd;
+
+        }
+
+        .semantic-status {
+
+            flex-shrink: 0;
+
+            font-size: 12px;
+            line-height: 1.6;
+
+            color: #777;
+
+            margin-bottom: 10px;
+
+        }
+
+        #semantic-map {
+
+            display: block;
+
+            width: 100%;
+            height: 290px;
+            min-height: 230px;
+            flex: 1 1 auto;
+
+            background: #ffffff;
+
+            border: none;
+
+            overflow: visible;
+
+        }
+
+        .semantic-line {
+
+            stroke: #b5b5b5;
+            stroke-width: 1.2;
+            stroke-dasharray: 3 3;
+
+        }
+
+        .semantic-node {
+
+            cursor: pointer;
+
+        }
+
+        .semantic-node circle {
+
+            fill: #555;
+            stroke: #ffffff;
+            stroke-width: 2;
+
+        }
+
+        .semantic-node:hover circle {
+
+            fill: #333;
+
+        }
+
+        .semantic-node.selected circle {
+
+            fill: #333;
+            stroke: #ffffff;
+            stroke-width: 3;
+
+        }
+
+        .semantic-label {
+
+            font-size: 15px;
+            font-weight: 500;
+            fill: #333;
+            pointer-events: none;
+
+        }
+
+        .semantic-similarity {
+
+            font-size: 12px;
+            font-weight: 500;
+            fill: #777;
+            pointer-events: none;
+
+        }
+
+        .semantic-legend {
+
+            flex-shrink: 0;
+
+            font-size: 11px;
+            line-height: 1.6;
+
+            color: #777;
+
+            margin-top: 10px;
+            padding-top: 10px;
+
+            border-top: 1px solid #e5e5e5;
+
+        }
+
+        .semantic-error {
+
+            color: #a33;
+            font-size: 12px;
+            line-height: 1.6;
+
+        }
+
+        /* =====================================================
+           LEAFLET OVERRIDES
+        ===================================================== */
+
+        .leaflet-control-zoom a {
+
+            color: #222 !important;
+
+        }
+
+        .leaflet-control-layers {
+
+            border-radius: 3px !important;
+
+        }
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media (max-width: 1100px) {
+
+            .app-layout {
+
+                grid-template-columns:
+                    230px minmax(0, 1fr) 200px;
+
+                grid-template-rows:
+                    minmax(340px, 62%) minmax(0, 38%);
+
+            }
+
+            .semantic-title {
+
+                font-size: 13px;
+                margin: 0 0 14px;
+
+            }
+
+            .description-text {
+
+                font-size: 15px;
+
+            }
+
+        }
+
+        @media (max-width: 800px) {
+
+            .app-layout {
+
+                display: flex;
+
+                flex-direction: column;
+
+                height: auto;
+                min-height: 0;
+
+            }
+
+            .sidebar {
+
+                width: 100%;
+
+                max-height: 420px;
+
+                border-right: none;
+
+                border-bottom: 1px solid #d7d7d7;
+
+            }
+
+            .map-container {
+
+                height: 420px;
+
+                width: 100%;
+
+            }
+
+            .bottom-panels {
+
+                display: grid;
+
+                grid-template-columns: 1fr 1fr;
+
+                width: 100%;
+                height: 360px;
+
+            }
+
+            .semantic-panel {
+
+                width: 100%;
+                min-height: 330px;
+
+                border-left: none;
+                border-bottom: 1px solid #c6c6c6;
+
+            }
+
+            .semantic-title {
+
+                margin: 0 0 14px;
+                font-size: 13px;
+
+            }
+
+            #semantic-map {
+
+                height: 270px;
+                min-height: 220px;
+
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            header {
+
+                padding: 0 14px;
+
+            }
+
+            header h1 {
+
+                font-size: 18px;
+
+            }
+
+            header span {
+
+                display: none;
+
+            }
+
+            .bottom-panels {
+
+                display: flex;
+
+                flex-direction: column;
+
+            }
+
+            .description-panel {
+
+                border-right: none;
+
+                border-bottom: 1px solid #d8d8d8;
+
+            }
+
+            .map-container {
+
+                height: 350px;
+
+            }
+
+        }

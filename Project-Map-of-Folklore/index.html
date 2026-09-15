@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Folklore Map</title>
+
+    <!-- Leaflet -->
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        crossorigin=""
+    >
+
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+    <!-- =====================================================
+         HEADER
+    ===================================================== -->
+
+    <header>
+
+        <h1>Folklore Map</h1>
+
+        <span>Stories, legends and places</span>
+
+    </header>
+
+
+    <!-- =====================================================
+         APPLICATION LAYOUT
+    ===================================================== -->
+
+    <main class="app-layout">
+
+
+        <!-- =================================================
+             LEFT SIDEBAR
+        ================================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- SEARCH -->
+
+            <section class="search-area">
+
+                <label
+                    class="search-label"
+                    for="searchInput"
+                >
+
+                    Search stories
+
+                </label>
+
+                <input
+                    id="searchInput"
+                    type="text"
+                    placeholder="Type ahead to find a story..."
+                    autocomplete="off"
+                >
+
+            </section>
+
+
+            <!-- TAGS / MOTIFS -->
+
+            <section class="motif-area">
+
+                <div class="motif-header">
+
+                    <strong>Tags / Motifs</strong>
+
+                    <button
+                        id="clearFilters"
+                        type="button"
+                    >
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+                <div
+                    id="tag-list"
+                    class="tag-list"
+                ></div>
+
+            </section>
+
+
+            <!-- STORY COUNT -->
+
+            <div
+                id="story-count"
+                class="story-count"
+            >
+
+                0 stories
+
+            </div>
+
+
+            <!-- STORY LIST -->
+
+            <section
+                id="story-list"
+                class="story-list"
+            ></section>
+
+
+        </aside>
+
+
+        <!-- =================================================
+             CENTER MAP
+        ================================================== -->
+
+        <section class="map-container">
+
+            <div id="map"></div>
+
+        </section>
+
+
+        <!-- =================================================
+             CENTER BOTTOM PANELS
+        ================================================== -->
+
+        <section class="bottom-panels">
+
+
+            <!-- STORY DESCRIPTION -->
+
+            <section class="panel description-panel">
+
+                <div class="panel-title">
+
+                    Story description
+
+                </div>
+
+                <div
+                    id="descriptionContent"
+                    class="placeholder"
+                >
+
+                    Select a story to view its full text.
+
+                </div>
+
+            </section>
+
+
+            <!-- NLP ANALYSIS -->
+
+            <section class="panel nlp-panel">
+
+                <div class="panel-title">
+
+                    NLP analysis
+
+                </div>
+
+                <div
+                    id="nlpContent"
+                    class="placeholder"
+                >
+
+                    Select a story to view its NLP results.
+
+                </div>
+
+            </section>
+
+
+        </section>
+
+
+        <!-- =================================================
+             RIGHT SEMANTIC PANEL
+        ================================================== -->
+
+        <aside class="semantic-panel">
+
+
+            <div class="semantic-title">
+
+                Semantic connection<br>
+
+            </div>
+
+
+            <div
+                id="semantic-status"
+                class="semantic-status"
+            >
+
+                Select a story to calculate semantic connections.
+
+            </div>
+
+
+            <svg
+                id="semantic-map"
+                viewBox="0 0 460 300"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                aria-label="Semantic connections between folklore stories"
+            >
+
+                <text
+                    x="300"
+                    y="175"
+                    text-anchor="middle"
+                    fill="#888"
+                    font-size="13"
+                >
+
+                    Select a story to view semantic connections.
+
+                </text>
+
+            </svg>
+
+
+            <div class="semantic-legend">
+
+                The selected story is shown in blue.
+
+                Other stories are positioned according to
+                their semantic similarity.
+
+                Higher similarity means a closer point.
+
+            </div>
+
+
+        </aside>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         LEAFLET
+    ===================================================== -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        crossorigin=""
+    ></script>
+
+
+    <!-- =====================================================
+         APPLICATION JAVASCRIPT
+    ===================================================== -->
+
+    <script type="module" src="script.js"></script>
+
+</body>
+
+</html>
