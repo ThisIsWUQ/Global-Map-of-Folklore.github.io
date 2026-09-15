@@ -8,3 +8,5 @@ The web may take a time to load please be patient.
 The web was mainly developed with support by ChatGPT. The prompts and conversation history can viewed here: [AI support](https://chatgpt.com/share/6aa8c3be-51fc-83eb-bf83-4ae6c8e2f543)
 
 This project leves many oppurtunities for improvement, both anlysis of folkloristic materials and web technicity.
+
+The full documentation of the project can be found here: [PDF](https://github.com/ThisIsWUQ/Global-Map-of-Folklore.github.io/blob/main/Term%20Project%20-%20Report.pdf)
